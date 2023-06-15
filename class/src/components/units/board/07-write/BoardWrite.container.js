@@ -4,6 +4,8 @@ import BoardWriteUI from './BoardWrite.presenter';
 import { 나의그래프큐엘셋팅 } from './BoardWrite.queries';
 
 export default function BoardWrite() {
+  const [isActive, setIsActive] = useState(false);
+
   const [writer, setWriter] = useState();
   const [title, setTitle] = useState();
   const [contents, setContents] = useState();
@@ -25,29 +27,49 @@ export default function BoardWrite() {
     console.log(result);
   };
 
+  //입력했을 때 감지
   const onChangeWriter = (event) => {
     setWriter(event.target.value);
+    if (event.target.value && title && contents) {
+      //writer 는 함수 끝나기 전까지 state가 바뀌는 것이 아님 임시저장공간에 담음 => 함수 끝나면 state 바꾸고 처음부터 다시 읽어 나감.
+      setIsActive(true);
+    }
   };
+
+  // const onChangeTitle = (event) => {
+  //   setTitle(event.target.value);
+  //   if (writer && title && contents) {
+  //     setIsActive(true);
+  //   }
+  // };
 
   const onChangeTitle = (event) => {
     setTitle(event.target.value);
+    if (writer && event.target.value && contents) {
+      setIsActive(true);
+    }
   };
 
   const onChangeContents = (event) => {
     setContents(event.target.value);
+    if (writer && title && event.target.value) {
+      setIsActive(true);
+    }
   };
+
+  // state 는 임시저장공간에 넣어두고 불필요한 랜더링을 방지한다. => 그 이후 처음부터 읽어 내려온다
 
   return (
     <div>
       <div>$$$$$$여기는 컨테이너 입니다.$$$$</div>
       <BoardWriteUI
-        aaa={onClickSubmit}
-        bbb={onChangeWriter}
-        ccc={onChangeTitle}
-        ddd={onChangeContents}
+        onClickSubmit={onClickSubmit}
+        onChangeWriter={onChangeWriter}
+        onChangeTitle={onChangeTitle}
+        onChangeContents={onChangeContents}
+        is
       />
       <div>$$$$$$여기는 컨테이너 입니다.$$$$</div>
     </div>
   );
 }
- 
