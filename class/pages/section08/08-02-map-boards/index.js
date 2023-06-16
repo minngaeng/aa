@@ -59,8 +59,7 @@ export default function StaticRoutingMovePage() {
         // 특별한 이유가 없으면? Fragment로 감싸자! <div />는 1개 더 그려야돼서 조금 느려짐
         // 1. Fragment 란? <></>, <Fragment></Fragment>
         // 2. Fragment 에 key 입력하는 방법? <Fragment></Fragment>
-        <div key={el.number}>
-          {' '}
+        <div key={el.number}>x
           {/* index 를 key 로 주게 되면 index 를 삭제할 때, 다음 게시글이 올라오면서 기존 index와 동일한 값을 갖게 됨. 즉, 유일하지 않음 */}
           <span>
             <input type="checkbox" />
