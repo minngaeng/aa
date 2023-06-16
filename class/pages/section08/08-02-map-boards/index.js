@@ -22,7 +22,7 @@ const FETCH_BOARDS = gql`
 // `;
 
 const DELETE_BOARD = gql`
-    mutation { deleteBoard ($number: Int) 
+  mutation deleteBoard($number: Int) {
     deleteBoard(number: $number) {
       message
     }
@@ -44,8 +44,8 @@ export default function StaticRoutingMovePage() {
     deleteBoard({
       variables: {
         number: Number(event.target.id),
-        refetchQueries: [{ query: FETCH_BOARDS }],
       },
+      refetchQueries: [{ query: FETCH_BOARDS }],
     });
     console.log(event);
     console.log(event.target);
@@ -55,7 +55,7 @@ export default function StaticRoutingMovePage() {
 
   return (
     <div>
-      {data?.fetchBoards.map(() => (
+      {data?.fetchBoards.map((el) => (
         // 특별한 이유가 없으면? Fragment로 감싸자! <div />는 1개 더 그려야돼서 조금 느려짐
         // 1. Fragment 란? <></>, <Fragment></Fragment>
         // 2. Fragment 에 key 입력하는 방법? <Fragment></Fragment>
@@ -65,7 +65,7 @@ export default function StaticRoutingMovePage() {
           <span>
             <input type="checkbox" />
           </span>
-          <span style={{ margin: '10px' }}>{el.umber}</span>
+          <span style={{ margin: '10px' }}>{el.number}</span>
           <span style={mystyles}>{el.title}</span>
           <span style={{ margin: '10px' }}>{el.writer}</span>
           <div>
