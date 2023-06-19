@@ -16,28 +16,102 @@ import {
   UploadButton,
   UploadWrapper,
 } from '../../styles/board.style';
+import { useState } from 'react';
 
 export default function Board() {
+  const [id, setId] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [title, setTitle] = useState('');
+  const [contents, setContents] = useState('');
+
+  const [errId, setErrId] = useState('');
+  const [errPwd, setErrPwd] = useState('');
+  const [errTitle, setErrTitle] = useState('');
+  const [errContents, setErrContents] = useState('');
+
+  const onChangeId = (event) => {
+    setId(event.target.value);
+    if (errId) {
+      setErrId('');
+    }
+  };
+
+  const onChangePwd = (event) => {
+    setPwd(event.target.value);
+    if (errPwd) {
+      setErrPwd('');
+    }
+  };
+
+  const onChangeTitle = (event) => {
+    setTitle(event.target.value);
+    if (errTitle) {
+      setErrTitle('');
+    }
+  };
+
+  const onChangeContents = (event) => {
+    setContents(event.target.value);
+    if (errContents) {
+      setErrContents('');
+    }
+  };
+
+  const onClickSubmit = (event) => {
+    if (!id) {
+      setErrId('이름을 입력하세요.');
+    }
+    if (!pwd) {
+      setErrId('비밀번호를 입력하세요.');
+    }
+    if (!title) {
+      setErrTitle('제목을 입력하세요.');
+    }
+    if (!contents) {
+      setErrContents('내용을 입력하세요.');
+    }
+  };
+
   return (
     <Wrapper>
       <Title>게시물 수정 </Title>
       <WriterPwdContainer>
         <InputWrapper>
           <Label>작성자</Label>
-          <WriterInput type="text" placeholder="이름을 적어주세요." />
+          <WriterInput
+            onChange={onChangeId}
+            type="text"
+            placeholder="이름을 적어주세요."
+          />
+          <div>{errId}</div>
         </InputWrapper>
         <InputWrapper>
           <Label>비밀번호</Label>
-          <WriterInput type="text" placeholder="비밀번호를 입력해주세요." />
+          <WriterInput
+            onChange={onChangePwd}
+            type="text"
+            placeholder="비밀번호를 입력해주세요."
+          />
+          <div>{errPwd}</div>
         </InputWrapper>
       </WriterPwdContainer>
       <InputWrapper>
         <Label>제목</Label>
-        <TitleInput type="text" placeholder="제목을 작성해주세요." />
+        <TitleInput
+          onChange={onChangeTitle}
+          type="text"
+          placeholder="제목을 작성해주세요."
+        />
+        <div>{errTitle}</div>
       </InputWrapper>
       <InputWrapper>
         <Label>내용</Label>
-        <ContentsInput type="text" placeholder="내용을 작성해주세요." />
+        <ContentsInput
+          onChange={onChangeContents}
+          type="text"
+          placeholder="내용을 작성해주세요."
+        />
+        <div>{errContents}</div>
       </InputWrapper>
       <InputWrapper>
         <Label>주소</Label>
@@ -77,8 +151,7 @@ export default function Board() {
         <label>사진</label>
       </div>
       <div>
-        <button>취소하기</button>
-        <button>수정하기</button>
+        <button onClick={onClickSubmit}>등록하기</button>
       </div>
     </Wrapper>
   );
