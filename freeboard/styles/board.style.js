@@ -5,21 +5,24 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 1200px;
-  height: 1847px;
-  font-weight: 500;
-  font-size: 16px;
   margin: 0 auto;
   border: 1px solid black;
   background: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+  padding-left: 102px;
+  padding-right: 102px;
+  padding-top: 60px;
+  padding-bottom: 100px;
 `;
 
 export const Title = styled.h1`
-  margin: 80px 513px;
+  padding-bottom: 40px;
+  font-weight: 700;
+  font-size: 36px;
 `;
 
 export const InputWrapper = styled.div`
-  padding-right: 24px;
+  /* padding-right: 24px; */
   padding-bottom: 40px;
   /* margin-left: 102px; */
 `;
@@ -34,12 +37,12 @@ export const WriterInput = styled.input`
   border: 1px solid #bdbdbd;
   width: 486px;
   height: 52px;
-  ::placeholder {
-    padding: 16px;
-  }
+  padding-left: 16px;
+  /* margin-right: 24px; */
 `;
 
 export const WriterPwdContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -49,22 +52,20 @@ export const TitleInput = styled.input`
   width: 996px;
   height: 52px;
   border: 1px solid #bdbdbd;
+  padding: 16px;
 `;
 
 export const ContentsInput = styled.input`
   width: 996px;
   height: 480px;
   border: 1px solid #bdbdbd;
-  padding: 14px;
-  padding-left: 16px;
+  padding: 16px;
 `;
 
 export const Zipcode = styled.input`
   width: 77px;
   height: 52px;
   border: 1px solid #bdbdbd;
-  /* padding-left: 16px; */
-  /* padding: 14px; */
   text-align: center;
 `;
 

@@ -1,4 +1,3 @@
-import { Input } from 'antd';
 import {
   Wrapper,
   Title,
@@ -62,7 +61,7 @@ export default function Board() {
       setErrId('이름을 입력하세요.');
     }
     if (!pwd) {
-      setErrId('비밀번호를 입력하세요.');
+      setErrPwd('비밀번호를 입력하세요.');
     }
     if (!title) {
       setErrTitle('제목을 입력하세요.');
@@ -74,10 +73,11 @@ export default function Board() {
 
   return (
     <Wrapper>
-      <Title>게시물 수정 </Title>
+      <Title>게시물 </Title>
       <WriterPwdContainer>
         <InputWrapper>
           <Label>작성자</Label>
+
           <WriterInput
             onChange={onChangeId}
             type="text"
