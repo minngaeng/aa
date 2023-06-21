@@ -1,3 +1,4 @@
+import { gql, useMutation } from '@apollo/client';
 import {
   Wrapper,
   Title,
@@ -17,6 +18,14 @@ import {
 } from '../../styles/board.style';
 import { useState } from 'react';
 
+const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+    }
+  }
+`;
+
 export default function Board() {
   const [id, setId] = useState('');
   const [pwd, setPwd] = useState('');
@@ -27,6 +36,8 @@ export default function Board() {
   const [errPwd, setErrPwd] = useState('');
   const [errTitle, setErrTitle] = useState('');
   const [errContents, setErrContents] = useState('');
+
+  const [createBoard] = useMutation(CREATE_BOARD);
 
   const onChangeId = (event) => {
     setId(event.target.value);
@@ -56,7 +67,7 @@ export default function Board() {
     }
   };
 
-  const onClickSubmit = (event) => {
+  const onClickSubmit = async (event) => {
     if (!id) {
       setErrId('이름을 입력하세요.');
     }
@@ -68,6 +79,20 @@ export default function Board() {
     }
     if (!contents) {
       setErrContents('내용을 입력하세요.');
+    }
+
+    if (id && pwd && title && contents) {
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer: id,
+            password: pwd,
+            title,
+            contents,
+          },
+        },
+      });
+      console.log(result);
     }
   };
 
