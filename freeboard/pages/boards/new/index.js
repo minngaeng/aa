@@ -15,7 +15,7 @@ import {
   Youtube,
   UploadButton,
   UploadWrapper,
-} from '../../styles/board.style';
+} from '../../../styles/board.style';
 import { useState } from 'react';
 
 const CREATE_BOARD = gql`
