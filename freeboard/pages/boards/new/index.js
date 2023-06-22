@@ -17,6 +17,7 @@ import {
   UploadWrapper,
 } from '../../../styles/board.style';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -27,6 +28,8 @@ const CREATE_BOARD = gql`
 `;
 
 export default function Board() {
+  const router = useRouter();
+
   const [id, setId] = useState('');
   const [pwd, setPwd] = useState('');
   const [title, setTitle] = useState('');
@@ -82,17 +85,22 @@ export default function Board() {
     }
 
     if (id && pwd && title && contents) {
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
-            writer: id,
-            password: pwd,
-            title,
-            contents,
+      try {
+        const result = await createBoard({
+          variables: {
+            createBoardInput: {
+              writer: id,
+              password: pwd,
+              title,
+              contents,
+            },
           },
-        },
-      });
-      console.log(result);
+        });
+        console.log(result.data.createBoard._id);
+        router.push(`/boards/${result.data.createBoard._id}`);
+      } catch (error) {
+        alert(error.message);
+      }
     }
   };
 
